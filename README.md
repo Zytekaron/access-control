@@ -65,9 +65,6 @@ returned when none of the permissions explicitly allow or deny an action.
 
 ## TODO
 
-- add the ability to lock down or release terminals or groups
-  quickly and securely by overwriting their permissions with a
-  temporary more (or less) restrictive level and set of permissions
 - add logging functionality and logwatchers
 - add key expiry after n-uses using logwatcher & migrate to IsExpired
 - create an api around the system

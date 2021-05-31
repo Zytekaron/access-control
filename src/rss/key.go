@@ -26,9 +26,9 @@ type Key struct {
 // The owner and keys status are taken into account
 func (k *Key) IsValid() *status.ClearStatus {
 	if v := k.Owner.IsValid(); v.Status == status.Deny {
-		return v
+		return v.Call("k:" + k.ID)
 	}
-	if time.Time(k.Expires).Before(time.Now()) {
+	if k.IsExpired() {
 		return status.NewDeny("key is expired").Call("k:" + k.ID)
 	}
 	if k.Disabled {
@@ -45,4 +45,8 @@ func (k *Key) HasRole(id string) bool {
 		}
 	}
 	return k.Owner.HasRole(id)
+}
+
+func (k *Key) IsExpired() bool {
+	return time.Time(k.Expires).Before(time.Now())
 }
