@@ -1,6 +1,6 @@
 # access-control
 
-### v0.0.1
+### v0.1.0
 
 A simple access restriction system to simulate a real-world
 system that requires simple, reliable, and flexible security
@@ -41,32 +41,32 @@ users with specific roles, flags, or keys to be allowed.
 ## Determining access
 
 When a Key is used on a Terminal, follow these steps:
-- Check if the user is disabled. If so, deny access.
-- Check if the key is disabled or has expired. If so, deny access.
-- \* Check if the Terminal Level or Permissions allow this Key.
+- Check if the user is disabled. If so, Block the action.
+- Check if the key is disabled or has expired. If so, Block the action.
+- \* Check if the Terminal Permissions allow this Key.
   The permissions are all checked and stored in a list.
-  - If the list contains Deny, Block the action (now)
-  - If the list contains Allow, Allow the action
+  - If the list contains Deny, Block the action (short-circuit capable)
+  - If the list contains Allow, Clear the action
   - If the list is all Neutral, repeat this step for the parent Group.
     If there is no parent, continue checking
-- If the Terminal does not belong to a Group, deny access
-- \* Check if the Group Level or Permissions allow this Key.
+- If the Terminal does not belong to a Group, Block the action
+- \* Check if the Group Permissions allow this Key.
   The permissions are all checked and stored in a list.
-  - If the list contains Deny, Block the action (now)
+  - If the list contains Deny, Block the action (short-circuit capable)
   - If the list contains Allow, Allow the action
   - If the list is all Neutral, continue checking
 - Deny; the User and Key do not have permission to access this terminal
-    
+
 &ast; When an overwrite is active, it will first check if the
 overwrite rules allows or denies the key, and will act accordingly.
 If the override returns Neutral, it will treat this as a Deny, as
-the overwrite ignores normal permissions, and Neutral is the state
-returned when none of the permissions explicitly allow or deny an action.
+the overwrite ignores normal permissions. Neutral is the state returned
+when none of the permissions explicitly allow or deny an action.
 
 ## TODO
 
 - add logging functionality and logwatchers
-- add key expiry after n-uses using logwatcher & migrate to IsExpired
+- add key expiry after n-uses using logwatcher
 - create an api around the system
 
 ## License
