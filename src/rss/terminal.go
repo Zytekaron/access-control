@@ -62,7 +62,8 @@ func (t *Terminal) Clears(key *Key) *status.ClearStatus {
 
 	// group checks take effect here
 	if t.Group != nil {
-		if res := t.Group.Clears(key); res.Status != status.Neutral {
+		res := t.Group.Clears(key)
+		if res.Status != status.Neutral {
 			return res
 		}
 	}
