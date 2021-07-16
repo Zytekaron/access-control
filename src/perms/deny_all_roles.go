@@ -8,10 +8,9 @@ import (
 	"time"
 )
 
-// DenyAllRoles denies a key when it or the keyholder possess any of the given roles
+// DenyAllRoles denies a key when it or the keyholder possess all of the given roles
 //
-// This should only be used in exceptional cases, *and it must be placed
-// before all other permissions in a group or terminal to function properly*
+// This should only be used in exceptional cases
 type DenyAllRoles struct {
 	// Role is the role required to deny the key
 	Roles []string `json:"roles"`
