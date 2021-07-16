@@ -37,7 +37,8 @@ func (t *Terminal) Clears(key *Key) *status.ClearStatus {
 	if t.Overwrite != nil {
 		res := t.Overwrite.Clears(key)
 		if res.Status == status.Neutral {
-			return status.NewDeny("denied by overwrite group: " + t.Overwrite.ID)
+			// exception case for using deny: always last in the chain
+			return status.NewDeny("denied by overwrite group '" + t.Overwrite.ID + "'")
 		}
 		return res
 	}
