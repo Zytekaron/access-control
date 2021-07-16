@@ -28,7 +28,7 @@ func (d *DenyAllRoles) Clears(key *rss.Key) *status.ClearStatus {
 			return status.NewNeutral()
 		}
 	}
-	return status.NewDeny("deny_all_roles denies access via roles: " + strings.Join(d.Roles, ", "))
+	return status.NewDeny("deny_all_roles denies access via roles: '" + strings.Join(d.Roles, ", ") + "'")
 }
 
 func (d *DenyAllRoles) IsExpired() bool {
